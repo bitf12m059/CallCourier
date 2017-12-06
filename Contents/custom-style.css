@@ -1,0 +1,109 @@
+﻿body {
+}
+
+.info_ {
+    background-color: #6AF;
+    border-color: #48D;
+}
+
+.warning_ {
+    background-color: #FA4;
+    border-color: #D82;
+}
+
+.success_ {
+    background-color: #8D5;
+    border-color: #6B3;
+}
+
+.error_ {
+    background-color: #F31;
+    border-color: #D10;
+}
+
+.static-loader {
+    position: fixed;
+    top: 0px;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    font-family: Arial;
+    color: #000;
+    font-weight: normal;
+    margin-top: 0px;
+    z-index: 9999;
+    display: none;
+    color: #FFF;
+    text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5) inset;
+    border: 1px solid;
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255, 255, 255, 0.1) 20px, rgba(255, 255, 255, 0.1) 40px);
+    padding: 9px;
+    font-size: 15px;
+}
+
+.static-loader p {
+    color: #FFF;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+}
+
+.hand-cursor {
+    cursor: pointer;
+}
+
+.hide_ {
+    display: none;
+}
+.padding-left-right-8per {
+    padding-left: 8% !important;
+    padding-right: 8% !important;
+}
+.no-margin {
+    margin: 0 !important;
+}
+.table thead tr th {
+    font-size: 10px;
+}
+.grid-overflow{
+    display: none !important;
+}
+.dataTable > thead > tr > th.sorting, .dataTable > thead > tr > th.sorting_asc, .dataTable > thead > tr > th.sorting_desc {
+    padding-left: 3px !important;
+    padding-right: 15px !important;
+}
+@media (min-width: 768px) { /*Should be 992px*/
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 992px) { /*Should be 1200px*/
+  .container {
+    width: 1170px;
+  }
+}
+@media (min-width: 1600px) {
+  .container {
+    width: 1570px;
+  }
+}
+.table-scrollable > .table > thead > tr > th, .table-scrollable > .table > tbody > tr > th, .table-scrollable > .table > tfoot > tr > th, .table-scrollable > .table > tfoot > tr > th, .table-scrollable > .table > tfoot > tr > td {
+    white-space: normal;
+}
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    
+    padding: 2px !important;
+}
+.margin-top-5 {
+    margin-top: 5px;
+}
+.no-padding {
+    padding: 0 !important;
+}
+.tracking-labls {
+    font-size: 12px;
+    font-weight: bold;
+}
+.font-size-12{
+    font-size: 12px;
+}
