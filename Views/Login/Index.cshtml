@@ -1,0 +1,124 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--
+
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>CallCourier | Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="~/Contents/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="~/Contents/assets/admin/pages/css/login.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="~/Contents/assets/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="~/Contents/custom-style.css" rel="stylesheet" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+    <a id="editpassword" href="@Url.Action("EditLogin", "Login")" style="display: none"></a>
+    <div id="static-loader" class="static-loader">
+        Loding...
+    </div>
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <!-- END SIDEBAR TOGGLER BUTTON -->
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a href="#">
+            <img src="~/Contents/images/logo.png" />
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <div class="login-form" id="userLogin">
+            <h3 class="form-title">Sign In</h3>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Login Id</label>
+                @*<input id="txtLoginID" class="form-control form-control-solid " type="text" value="test-0001" autocomplete="off" placeholder="Login ID" name="LoginID" />*@
+                <input id="txtLoginID" class="form-control form-control-solid " type="text" autocomplete="off" placeholder="Login ID" name="LoginID" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                @*<input id="txtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" value="test-0001" autocomplete="off" placeholder="Password" name="password" />*@
+                <input id="txtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password" />
+            </div>
+            <div class="form-actions">
+                <button type="submit" id="btnLogin" class="btn btn-success uppercase" onclick="memberLogin('@Url.Action("CheckLogin", "Login")')"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</button>
+                <!--<a href="javascript:forgotPassword()" id="forget-password" class="forget-password">Forgot Password?</a>-->
+                <a href="javascript:forgotPassword()" id="forget-password" class="forget-password">Edit Password?</a>
+            </div>
+        </div>
+        <a id="afterLogin" href="@Url.Action("Index", "Home" )" style="display: none"></a>
+        <!-- END LOGIN FORM -->
+        <!-- BEGIN FORGOT PASSWORD FORM -->
+        <!--   <div class="login-form text-center" id="forgotPassword" style="display:none;">
+               <h3 class="form-title">Forgot Password?</h3>
+               <h5>Please contact administrator for the support.</h5>
+               <a href="javascript:gobackForgot()" id="forget-password" class="forget-password">Go back</a>
+           </div>-->
+        <div class="login-form text-center" id="forgotPassword" style="display:none;">
+
+            <!-- BEGIN LOGIN FORM -->
+            <div class="login-form" id="userLogin">
+                <h3 class="form-title">Reset Password</h3>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Login Id</label>
+                    @*<input id="txtLoginID" class="form-control form-control-solid " type="text" value="test-0001" autocomplete="off" placeholder="Login ID" name="LoginID" />*@
+                    <input id="ntxtLoginID" class="form-control form-control-solid " type="text" autocomplete="off" placeholder="Login ID" name="LoginID" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Old Password</label>
+                    @*<input id="txtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" value="test-0001" autocomplete="off" placeholder="Password" name="password" />*@
+                    <input id="ntxtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Old Password" name="password" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">New Password</label>
+                    @*<input id="txtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" value="test-0001" autocomplete="off" placeholder="Password" name="password" />*@
+                    <input id="newtxtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="New Password" name="newpassword" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Confirm Password</label>
+                    @*<input id="txtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" value="test-0001" autocomplete="off" placeholder="Password" name="password" />*@
+                    <input id="confirmtxtpassword" class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="Confirm Password" name="newpassword" />
+                </div>
+
+                <div class="form-actions">
+                    <!--<button type="submit" class="btn btn-success uppercase" onclick="memberEditPassword()"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Reset Password</button>-->
+                    <button type="submit" id="btnLogin" class="btn btn-success uppercase" onclick="memberLogin('@Url.Action("CheckLogin", "Login")')"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Reset Password</button>
+                </div>
+            </div>
+            <a href="javascript:gobackForgot()" id="forget-password" class="forget-password">Go back</a>
+            <!-- END FORGOT PASSWORD FORM -->
+        </div>
+
+        <div class="copyright">
+            2015 © CallCourier. All rights reserved.<small> Powered by </small>
+            <a href="http://callcourier.com.pk/" target="_blank"> CallCourier</a>
+        </div>
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+        <script src="~/Scripts/common.js"></script>
+        <script src="~/Js/Login/Index.js"></script>
+</body>
+<!-- END BODY -->
+</html>
