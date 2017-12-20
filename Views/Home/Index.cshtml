@@ -33,12 +33,13 @@
 
 <div>
     <h3>Read data from file</h3>
-    <h5>@ViewBag.text</h5>
+    <h5>@ViewBag.data</h5>
 </div>
 <div>
-    @using (Html.BeginForm("GetCNFromFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", runat="server" }))
+    @using (Html.BeginForm("GetCNFromFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data"}))
     {
-        <input type="file" name="postedFile" />
+        <input type="file" name="file" />
         <input type="submit" value="Import" />
     }
+   
 </div>
