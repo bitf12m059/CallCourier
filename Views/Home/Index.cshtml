@@ -3,6 +3,42 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Content{
+    <link href="~/Contents/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="~/Contents/assets/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="~/Contents/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script src="~/Contents/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/Contents/assets/admin/pages/scripts/table-managed.js"></script>
+    @*<script src="~/Js/Reports/MyBookings.js"></script>*@
+    <script src="~/Js/Reports/MyBookingsNew.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sample_2').dataTable();
+        });
+    </script>
+}
+
+<a href="@Url.Action("NewGetLoadSheet", "Reports")" style="display:none;" id="getLoadSheet"></a>
+<a id="getMyBookingsGoGreen" href="@Url.Action("GetCNFromFile", "Home")" style="display: none"></a>
+<a id="cancelBooking" href="@Url.Action("GetMyBookings", "Reports")" style="display: none"></a>
+<a id="exportToExcel" href="" style="display: none"></a>
 
 <h2>Index</h2>
 
+<input type="file" class="input-group-control" style="height: 28px;" id="filePath" />
+<button type="button" class="btn btn-sm blue margin-top-5" onclick="getDatafromFile()">ReadData</button>
+
+<div>
+    <h3>Read data from file</h3>
+    <h5>@ViewBag.text</h5>
+</div>
+<div>
+    @using (Html.BeginForm("GetCNFromFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", runat="server" }))
+    {
+        <input type="file" name="postedFile" />
+        <input type="submit" value="Import" />
+    }
+</div>

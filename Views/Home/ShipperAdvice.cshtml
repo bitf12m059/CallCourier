@@ -4,6 +4,26 @@
 }
 @using callCourierTest.Models
 @model IEnumerable<callCourierTest.Models.GetReasonedCNForShipperAdvice_Result>
+@section Content{
+    <link href="~/Contents/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="~/Contents/assets/global/plugins/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="~/Contents/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script src="~/Contents/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/Contents/assets/admin/pages/scripts/table-managed.js"></script>
+    @*<script src="~/Js/Reports/MyBookings.js"></script>*@
+<script src="~/Js/shipper/shipperAdvice.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sample_2').dataTable();
+    });
+</script>
+
+
+   
+}
 <!DOCTYPE html>
 
 <html>
@@ -12,8 +32,8 @@
     <title>GetShipperAdvice</title>
 </head>
 <body>
-    <div>
-        <header> Shipper Advice</header>
+    <a id="UshipperAdvice" href="@Url.Action("UpdateShipperAdvice", "Home")" style="display: none"></a>
+    <div id="UshipperAdviceDiv">
         <table class="table table-striped table-bordered table-hover" id="sample_2">
             <thead>
                 <tr>
@@ -34,12 +54,13 @@
                     </th>
                     <th>Other Inst</th>
                     <th>Callback Time</th>
+                    <th>Action</th>
                 </tr>
-            <thead>
-<tbody>
+            </thead>
+            <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="@item.CNNo" onclick="getShipperRecord(this)">
                         <td>@item.CNNo</td>
                         <td>@item.CNStatus</td>
                         <td>@item.ReasonStatus</td>
@@ -47,10 +68,45 @@
                         <td>@item.ReasonCode</td>
                         <td>@item.OtherInst</td>
                         <td>@item.CallBackTime.ToString("d")</td>
+                        <!-- <td><a class="btn btn-circle-right" href="#">UpdateStatus</a></td>-->
+                        <td><button type="button" class="btn btn-sm blue margin-top-5">Status</button></td>
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+
+    
+    <div id="UpdateShipperAdviceForm">
+        <header> Shipper Advice</header>
+        <div class="cont_principal">
+            <div class="cont_centrar">
+                <div class="cont_login">
+                    <form action="">
+                       
+                        <div class="cont_text_inputs">
+                           
+
+                            <input type="text" class="input_form_sign d_block active_inp" id="cnno" placeholder="CNNO" name="emauil_us" />
+                            <input type="text" class="input_form_sign d_block  active_inp" id="CNStatus" placeholder="PASSWORD" name="pass_us" />
+                            <input type="text" class="input_form_sign" placeholder="reasonStatus" id="reasonStatus" name="conf_pass_us" />
+                            <input type="text" class="input_form_sign d_block active_inp" id="BranchRemarks" placeholder="CNNO" name="emauil_us" />
+                            <input type="text" class="input_form_sign d_block  active_inp" id="ReasonCode" placeholder="Reason Code" name="pass_us" />
+                            <input type="text" class="input_form_sign" placeholder="Other Inst" id="OtherInst" name="conf_pass_us" />
+                            <input type="text" class="input_form_sign" placeholder="Other Inst" id="callbackTime" name="conf_pass_us" />
+                        </div>
+                        <div class="cont_btn">
+                            <button class="btn_sign" onclick="getUpdateShipperRecord()">SIGN IN</button>
+
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 </body>
 </html>

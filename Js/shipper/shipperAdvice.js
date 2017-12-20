@@ -1,32 +1,6 @@
-﻿jQuery(document).ready(function () {
+﻿$(document).ready(function () {
 
-    $("#MyBookings").addClass('active');
-    //var currentdate = new Date();
-    //var datetime = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear();
-    //var totime = currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear();
-    $("#sample_2_filter").addClass("pull-right");
-    $("#sample_2_paginate").addClass("pull-right");
-    getMyBookingsNew();
-
-    $("#dateFrom").datepicker({
-        format: 'dd/mm/yyyy'
-        //startDate: '-100d'   => It is for the start date means User will access the start date 
-    }).on('changeDate', function (ev) {
-        var dateFrom = $("#dateFrom").val();
-        var dateTo = $("#dateTo").val();
-        getMyBookingsNew();
-        $(this).datepicker('hide');
-    });
-    $("#dateTo").datepicker({
-        format: 'dd/mm/yyyy'
-    }).on('changeDate', function (ev) {
-        var dateFrom = $("#dateFrom").val();
-        var dateTo = $("#dateTo").val();
-
-        getMyBookingsNew();
-        $(this).datepicker('hide');
-    });
-    $("#sample_2").DataTable();
+    $("#UpdateShipperAdviceForm").hide();
 });
 
 var printCN = function (url) {
@@ -34,7 +8,7 @@ var printCN = function (url) {
 };
 
 var getLoadSheet = function () {
-   
+
     showLoader('In Progress..Please wait!', 'warning');
     var dateFrom = $("#dateFrom").val();
     var dateTo = $("#dateTo").val();
@@ -76,14 +50,39 @@ var getDatafromFile = function () {
     }
 
 }
+var getShipperRecord = function (myclickCn)
+{
+    var CNNO, CNStatus, reasonStatus, branchRemarks, ReasonCode, OtherInst, CallbackTime;
+    var url = $("#UshipperAdvice").attr("href");
+    var rows = document.getElementsByTagName("tr");
+    for (var i = 0; i < rows.length; i++) {
+        rows[i].onclick = function () {
+            var rowTD = this.getElementsByTagName('td');
+            CNNO = rowTD[0].textContent; CNStatus = rowTD[1].textContent; reasonStatus = rowTD[2].textContent;
+            branchRemarks = rowTD[3].textContent; ReasonCode = rowTD[4].textContent; OtherInst = rowTD[5].textContent;
+            CallbackTime = rowTD[6].textContent;
+            
+            $("#cnno").val(CNNO);
+            $("#CNStatus").val(CNStatus);
+            $("#reasonStatus").val(reasonStatus);
+            $("#BranchRemarks").val(branchRemarks);
+            $("#ReasonCode").val(ReasonCode);
+            $("#OtherInst").val(OtherInst);
+            $("#callbackTime").val(CallbackTime);
+            $("#UshipperAdviceDiv").hide();
+            $("#UpdateShipperAdviceForm").show();
+            
+        };
+    }
+}
 var getMyBookingsNew = function (pageno) {
-  
+
     if (pageno === undefined) {
         pageno = 1;
     }
     var takeRecords = $("#drpTake option:selected").val();
     var old = 1;
-  
+
     $("#hidPageno").val(pageno);
     var dateFrom = $("#dateFrom").val();
     var dateTo = $("#dateTo").val();
@@ -99,7 +98,7 @@ var getMyBookingsNew = function (pageno) {
         type: "POST",
         data: { dateFrom: dateFrom + "", dateTo: dateTo, pageno: pageno + "", takeRecords: takeRecords + "", old: old, CNNOFrom: CNNOFrom, CNNOTo: CNNOTo, sCNNOFrom: sCNNOFrom, sCNNOTo: sCNNOTo },
         success: function (msg) {
-        
+
             $("#myBookingCollection").html(msg);
             $("#sample_2").DataTable({
                 paging: false,
@@ -118,22 +117,32 @@ var getMyBookingsNew = function (pageno) {
         }
     });
 };
-var cancelBooking = function (url) {
-    showLoader('Cancellation in progress.. Please wait!', 'warning');
+var getUpdateShipperRecord = function () {
+    showLoader('Shipper Advice in progress.. Please wait!', 'warning');
+    var CNNO= $("#cnno").val();
+    var CNStatus= $("#CNStatus").val();
+    var reasonStatus=$("#reasonStatus").val();
+    var branchRemarks=$("#BranchRemarks").val();
+    var ReasonCode= $("#ReasonCode").val();
+    var OtherInst= $("#OtherInst").val();
+    var CallbackTime = $("#callbackTime").val();
+    var url = $("#UshipperAdvice").attr("href");
     $.ajax({
         url: url,
         type: "POST",
+        data: { CNNO: CNNO + "", CNStatus: CNStatus, reasonStatus: reasonStatus + "", branchRemarks: branchRemarks + "", ReasonCode: ReasonCode, OtherInst: OtherInst, CallbackTime: CallbackTime },
         success: function (msg) {
-            if (msg != "false") {
-                $("#" + msg).html('<span class="label label-danger">Cancelled</span>');
-                AutoLoader("Bookoing cancelled successfully..", "success");
+
+            if (msg === "true") {
+                window.open('ShipperAdvice', '_blank');
+                hideLoader();
             }
         }
     });
 };
 
 var printSelectedSheet = function () {
-   
+
     var dateFrom = $("#dateFrom").val();
     var dateTo = $("#dateTo").val();
 
